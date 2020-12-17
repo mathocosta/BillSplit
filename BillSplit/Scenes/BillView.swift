@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  BillView.swift
 //  BillSplit
 //
 //  Created by Matheus Oliveira Costa on 17/12/20.
@@ -40,7 +40,7 @@ private struct AddItemButton: View {
     }
 }
 
-struct ContentView: View {
+struct BillView: View {
     @State var addFormIsPresented = false
 
     var body: some View {
@@ -74,8 +74,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct BillView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        BillView()
     }
 }

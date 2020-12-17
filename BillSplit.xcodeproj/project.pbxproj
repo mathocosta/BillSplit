@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		27135229258BBFE2003DF55F /* BillSplitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27135228258BBFE2003DF55F /* BillSplitApp.swift */; };
-		2713522B258BBFE2003DF55F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713522A258BBFE2003DF55F /* ContentView.swift */; };
+		2713522B258BBFE2003DF55F /* BillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713522A258BBFE2003DF55F /* BillView.swift */; };
 		2713522D258BBFE4003DF55F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2713522C258BBFE4003DF55F /* Assets.xcassets */; };
 		27135230258BBFE4003DF55F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2713522F258BBFE4003DF55F /* Preview Assets.xcassets */; };
 		2713523B258BBFE5003DF55F /* BillSplitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713523A258BBFE5003DF55F /* BillSplitTests.swift */; };
@@ -38,7 +38,7 @@
 /* Begin PBXFileReference section */
 		27135225258BBFE2003DF55F /* BillSplit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BillSplit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27135228258BBFE2003DF55F /* BillSplitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillSplitApp.swift; sourceTree = "<group>"; };
-		2713522A258BBFE2003DF55F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2713522A258BBFE2003DF55F /* BillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillView.swift; sourceTree = "<group>"; };
 		2713522C258BBFE4003DF55F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2713522F258BBFE4003DF55F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		27135231258BBFE4003DF55F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -101,11 +101,8 @@
 		27135227258BBFE2003DF55F /* BillSplit */ = {
 			isa = PBXGroup;
 			children = (
+				27135271258BF433003DF55F /* Scenes */,
 				27135228258BBFE2003DF55F /* BillSplitApp.swift */,
-				2713522A258BBFE2003DF55F /* ContentView.swift */,
-				27135266258BD880003DF55F /* CreateItemView.swift */,
-				27135256258BCC50003DF55F /* RowView.swift */,
-				2713525E258BD1DC003DF55F /* RoundedButtonStyle.swift */,
 				2713522C258BBFE4003DF55F /* Assets.xcassets */,
 				27135231258BBFE4003DF55F /* Info.plist */,
 				2713522E258BBFE4003DF55F /* Preview Content */,
@@ -137,6 +134,25 @@
 				27135247258BBFE5003DF55F /* Info.plist */,
 			);
 			path = BillSplitUITests;
+			sourceTree = "<group>";
+		};
+		27135271258BF433003DF55F /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				27135272258BF451003DF55F /* Components */,
+				2713522A258BBFE2003DF55F /* BillView.swift */,
+				27135266258BD880003DF55F /* CreateItemView.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		27135272258BF451003DF55F /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2713525E258BD1DC003DF55F /* RoundedButtonStyle.swift */,
+				27135256258BCC50003DF55F /* RowView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,7 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2713522B258BBFE2003DF55F /* ContentView.swift in Sources */,
+				2713522B258BBFE2003DF55F /* BillView.swift in Sources */,
 				27135267258BD880003DF55F /* CreateItemView.swift in Sources */,
 				27135257258BCC50003DF55F /* RowView.swift in Sources */,
 				2713525F258BD1DC003DF55F /* RoundedButtonStyle.swift in Sources */,
