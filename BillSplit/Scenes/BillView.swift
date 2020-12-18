@@ -7,14 +7,17 @@
 
 import SwiftUI
 
-private struct CloseBillButton: View {
+// MARK: - Components
+
+private struct LastRowButton: View {
+    let title: String
     let action: () -> Void
 
     var body: some View {
         Button(action: self.action) {
             HStack {
                 Spacer()
-                Text("Fechar conta")
+                Text(title)
                     .font(.headline)
                 Spacer()
             }
@@ -40,34 +43,78 @@ private struct AddItemButton: View {
     }
 }
 
+private struct ExpenseList: View {
+    var expenses: [BillExpense]
+
+    @State private var selectedExpense: BillExpense? = nil
+    @State private var isShowingCheckoutView = false
+
+    var body: some View {
+        ScrollView {
+            LazyVStack {
+                ForEach(expenses) { (expense) in
+                    RowView(expense: expense)
+                        .onTapGesture {
+                            self.selectedExpense = expenses.first(where: {
+                                $0.id == expense.id
+                            })
+                        }
+                }
+
+                Spacer(minLength: 16)
+                if !expenses.isEmpty {
+                    NavigationLink(
+                        destination: CheckoutView(closedBill: Bill(expenses: expenses)),
+                        isActive: $isShowingCheckoutView,
+                        label: { EmptyView() }
+                    )
+                    LastRowButton(title: "Fechar conta", action: {
+                        self.isShowingCheckoutView = true
+                    })
+                }
+
+            }
+            .padding()
+            .sheet(item: $selectedExpense) { _ in
+                CreateItemView(expense: $selectedExpense)
+            }
+        }
+    }
+}
+
+// MARK: - Bill view
+
+class BillPresenter: ObservableObject {
+    @Published var expenses: [BillExpense] = [
+        BillExpense(name: "Café", price: 12.99, assignee: nil, quantity: 1),
+        BillExpense(name: "Banana", price: 0.50, assignee: "João", quantity: 3)
+    ]
+}
+
 struct BillView: View {
     @State var addFormIsPresented = false
+    @ObservedObject var presenter = BillPresenter()
+
+    @State private var newExpense: BillExpense?
 
     var body: some View {
         NavigationView {
             GeometryReader { (geometry) in
                 ZStack(alignment: .bottomTrailing) {
-                    ScrollView {
-                        LazyVStack {
-                            RowView()
-                            RowView()
+                    ExpenseList(expenses: presenter.expenses)
 
-                            Spacer(minLength: 16)
-                            CloseBillButton(action: {})
-                        }
-                        .padding()
-                    }
-
-                    AddItemButton(action: { self.addFormIsPresented = true })
+                    AddItemButton(action: { self.newExpense = BillExpense() })
                         .padding(.trailing)
                         .padding(.bottom, geometry.safeAreaInsets.bottom + 16)
-                        .sheet(isPresented: $addFormIsPresented, content: {
-                            CreateItemView(isPresented: $addFormIsPresented)
-                        })
+                        .sheet(item: $newExpense) {
+                            print(newExpense.debugDescription)
+                        } content: { _ in
+                            CreateItemView(expense: $newExpense)
+                        }
                 }
                 .background(Color(.systemGray6).opacity(0.8))
                 .edgesIgnoringSafeArea(.bottom)
-                .navigationTitle("Conta")
+                .navigationTitle("Conta aberta")
                 .navigationBarItems(trailing: EditButton())
             }
         }

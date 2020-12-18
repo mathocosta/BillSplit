@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2709AC9D258D03CE00A4A548 /* BillExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2709AC9C258D03CE00A4A548 /* BillExpense.swift */; };
+		2709ACA8258D04EA00A4A548 /* CheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2709ACA7258D04EA00A4A548 /* CheckoutView.swift */; };
+		2709ACAD258D050B00A4A548 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2709ACAC258D050B00A4A548 /* Bill.swift */; };
+		2709ACB3258D11A400A4A548 /* PriceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2709ACB2258D11A400A4A548 /* PriceFormatter.swift */; };
+		2709ACC1258D1DDC00A4A548 /* BillTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2709ACC0258D1DDC00A4A548 /* BillTests.swift */; };
 		27135229258BBFE2003DF55F /* BillSplitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27135228258BBFE2003DF55F /* BillSplitApp.swift */; };
 		2713522B258BBFE2003DF55F /* BillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713522A258BBFE2003DF55F /* BillView.swift */; };
 		2713522D258BBFE4003DF55F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2713522C258BBFE4003DF55F /* Assets.xcassets */; };
@@ -36,6 +41,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2709AC9C258D03CE00A4A548 /* BillExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillExpense.swift; sourceTree = "<group>"; };
+		2709ACA7258D04EA00A4A548 /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
+		2709ACAC258D050B00A4A548 /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
+		2709ACB2258D11A400A4A548 /* PriceFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceFormatter.swift; sourceTree = "<group>"; };
+		2709ACC0258D1DDC00A4A548 /* BillTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillTests.swift; sourceTree = "<group>"; };
 		27135225258BBFE2003DF55F /* BillSplit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BillSplit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27135228258BBFE2003DF55F /* BillSplitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillSplitApp.swift; sourceTree = "<group>"; };
 		2713522A258BBFE2003DF55F /* BillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillView.swift; sourceTree = "<group>"; };
@@ -78,6 +88,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2709AC7C258CC58200A4A548 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2709AC9C258D03CE00A4A548 /* BillExpense.swift */,
+				2709ACAC258D050B00A4A548 /* Bill.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2709ACB1258D119200A4A548 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				2709ACB2258D11A400A4A548 /* PriceFormatter.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		2713521C258BBFE2003DF55F = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +128,8 @@
 		27135227258BBFE2003DF55F /* BillSplit */ = {
 			isa = PBXGroup;
 			children = (
+				2709ACB1258D119200A4A548 /* Shared */,
+				2709AC7C258CC58200A4A548 /* Models */,
 				27135271258BF433003DF55F /* Scenes */,
 				27135228258BBFE2003DF55F /* BillSplitApp.swift */,
 				2713522C258BBFE4003DF55F /* Assets.xcassets */,
@@ -121,6 +150,7 @@
 		27135239258BBFE5003DF55F /* BillSplitTests */ = {
 			isa = PBXGroup;
 			children = (
+				2709ACC0258D1DDC00A4A548 /* BillTests.swift */,
 				2713523A258BBFE5003DF55F /* BillSplitTests.swift */,
 				2713523C258BBFE5003DF55F /* Info.plist */,
 			);
@@ -142,6 +172,7 @@
 				27135272258BF451003DF55F /* Components */,
 				2713522A258BBFE2003DF55F /* BillView.swift */,
 				27135266258BD880003DF55F /* CreateItemView.swift */,
+				2709ACA7258D04EA00A4A548 /* CheckoutView.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -284,11 +315,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2709ACAD258D050B00A4A548 /* Bill.swift in Sources */,
 				2713522B258BBFE2003DF55F /* BillView.swift in Sources */,
 				27135267258BD880003DF55F /* CreateItemView.swift in Sources */,
+				2709AC9D258D03CE00A4A548 /* BillExpense.swift in Sources */,
+				2709ACA8258D04EA00A4A548 /* CheckoutView.swift in Sources */,
 				27135257258BCC50003DF55F /* RowView.swift in Sources */,
 				2713525F258BD1DC003DF55F /* RoundedButtonStyle.swift in Sources */,
 				27135229258BBFE2003DF55F /* BillSplitApp.swift in Sources */,
+				2709ACB3258D11A400A4A548 /* PriceFormatter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +331,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2709ACC1258D1DDC00A4A548 /* BillTests.swift in Sources */,
 				2713523B258BBFE5003DF55F /* BillSplitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
