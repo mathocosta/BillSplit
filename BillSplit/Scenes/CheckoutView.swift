@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-private struct CheckoutRowView: View {
+private struct CheckoutCell: View {
     let label: String
     let value: Double
 
@@ -27,12 +27,27 @@ private struct CheckoutRowView: View {
 struct CheckoutView: View {
     let closedBill: Bill
 
+    @Environment(\.presentationMode) private var presentationMode
+    @State private var isShowingConfirmationAlert = false
+
+
+    private func confirmationAlert() -> Alert {
+        Alert(
+            title: Text("Atenção"),
+            message: Text("Ao confirmar pagamento, os dados serão resetados e não poderá ser desfeito."),
+            primaryButton: .destructive(Text("Confirmar"), action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }),
+            secondaryButton: .cancel()
+        )
+    }
+
     var body: some View {
             List {
                 Section(header: Text("Total").bold()) {
-                    CheckoutRowView(label: "Subtotal", value: closedBill.totalValue)
-                    CheckoutRowView(label: "Taxa de 10%", value: closedBill.serviceTaxValue)
-                    CheckoutRowView(
+                    CheckoutCell(label: "Subtotal", value: closedBill.totalValue)
+                    CheckoutCell(label: "Taxa de 10%", value: closedBill.serviceTaxValue)
+                    CheckoutCell(
                         label: "Total",
                         value: closedBill.totalValue + closedBill.serviceTaxValue
                     )
@@ -41,13 +56,17 @@ struct CheckoutView: View {
                 Section(header: Text("Valor por pessoa").bold()) {
                     ForEach(closedBill.totalValueByAssignee.sorted(by: <), id: \.key) {
                         (key, value) in
-                        CheckoutRowView(label: "\(key) ", value: value)
+                        CheckoutCell(label: "\(key) ", value: value)
                     }
                 }
             }
             .listStyle(GroupedListStyle())
             .navigationTitle("Conta fechada")
-            .navigationBarItems(trailing: Button("Pagar", action: {}))
+            .navigationBarItems(trailing: Button("Pagar", action: {
+                self.isShowingConfirmationAlert = true
+            }))
+            .alert(isPresented: $isShowingConfirmationAlert,
+                   content: confirmationAlert)
     }
 }
 

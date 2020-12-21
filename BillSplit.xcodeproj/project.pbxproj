@@ -18,7 +18,7 @@
 		27135230258BBFE4003DF55F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2713522F258BBFE4003DF55F /* Preview Assets.xcassets */; };
 		2713523B258BBFE5003DF55F /* BillSplitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713523A258BBFE5003DF55F /* BillSplitTests.swift */; };
 		27135246258BBFE5003DF55F /* BillSplitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27135245258BBFE5003DF55F /* BillSplitUITests.swift */; };
-		27135257258BCC50003DF55F /* RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27135256258BCC50003DF55F /* RowView.swift */; };
+		27135257258BCC50003DF55F /* ExpenseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27135256258BCC50003DF55F /* ExpenseListCell.swift */; };
 		2713525F258BD1DC003DF55F /* RoundedButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713525E258BD1DC003DF55F /* RoundedButtonStyle.swift */; };
 		27135267258BD880003DF55F /* CreateItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27135266258BD880003DF55F /* CreateItemView.swift */; };
 /* End PBXBuildFile section */
@@ -58,7 +58,7 @@
 		27135241258BBFE5003DF55F /* BillSplitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BillSplitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27135245258BBFE5003DF55F /* BillSplitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillSplitUITests.swift; sourceTree = "<group>"; };
 		27135247258BBFE5003DF55F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		27135256258BCC50003DF55F /* RowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowView.swift; sourceTree = "<group>"; };
+		27135256258BCC50003DF55F /* ExpenseListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseListCell.swift; sourceTree = "<group>"; };
 		2713525E258BD1DC003DF55F /* RoundedButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButtonStyle.swift; sourceTree = "<group>"; };
 		27135266258BD880003DF55F /* CreateItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -181,7 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				2713525E258BD1DC003DF55F /* RoundedButtonStyle.swift */,
-				27135256258BCC50003DF55F /* RowView.swift */,
+				27135256258BCC50003DF55F /* ExpenseListCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -320,7 +320,7 @@
 				27135267258BD880003DF55F /* CreateItemView.swift in Sources */,
 				2709AC9D258D03CE00A4A548 /* BillExpense.swift in Sources */,
 				2709ACA8258D04EA00A4A548 /* CheckoutView.swift in Sources */,
-				27135257258BCC50003DF55F /* RowView.swift in Sources */,
+				27135257258BCC50003DF55F /* ExpenseListCell.swift in Sources */,
 				2713525F258BD1DC003DF55F /* RoundedButtonStyle.swift in Sources */,
 				27135229258BBFE2003DF55F /* BillSplitApp.swift in Sources */,
 				2709ACB3258D11A400A4A548 /* PriceFormatter.swift in Sources */,

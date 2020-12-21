@@ -53,7 +53,7 @@ private struct ExpenseList: View {
         ScrollView {
             LazyVStack {
                 ForEach(expenses) { (expense) in
-                    RowView(expense: expense)
+                    ExpenseListCell(expense: expense)
                         .onTapGesture {
                             self.selectedExpense = expenses.first(where: {
                                 $0.id == expense.id

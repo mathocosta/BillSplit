@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CoreData
 
 @main
 struct BillSplitApp: App {

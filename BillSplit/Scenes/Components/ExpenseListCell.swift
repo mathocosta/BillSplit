@@ -1,5 +1,5 @@
 //
-//  RowView.swift
+//  ExpenseListCell.swift
 //  BillSplit
 //
 //  Created by Matheus Oliveira Costa on 17/12/20.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RowView: View {
+struct ExpenseListCell: View {
     @Environment(\.editMode) var editMode
 
     let expense: BillExpense
@@ -60,10 +60,10 @@ struct RowView_Previews: PreviewProvider {
     static let testExpense = BillExpense(name: "Café", price: 12.99, assignee: "Pedro", quantity: 1)
 
     static var previews: some View {
-        RowView(expense: testExpense)
+        ExpenseListCell(expense: testExpense)
             .previewLayout(.sizeThatFits)
 
-        RowView(expense: testExpense)
+        ExpenseListCell(expense: testExpense)
             .previewLayout(.sizeThatFits)
             .environment(\.editMode, .constant(.active))
     }
