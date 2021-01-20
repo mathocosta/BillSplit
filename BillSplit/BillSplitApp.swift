@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct BillSplitApp: App {
+    let persistenceWorker = PersistenceWorker()
+
     var body: some Scene {
         WindowGroup {
             BillView()
+                .environmentObject(
+                    BillStore(managedObjectContext: persistenceWorker.managedObjectContext)
+                )
         }
     }
 }

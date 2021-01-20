@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - Components
 
-private struct LastRowButton: View {
+private struct LastCellButton: View {
     let title: String
     let action: () -> Void
 
@@ -44,10 +44,14 @@ private struct AddItemButton: View {
 }
 
 private struct ExpenseList: View {
-    var expenses: [BillExpense]
+    @ObservedObject var store: BillStore
 
-    @State private var selectedExpense: BillExpense? = nil
+    @State private var selectedExpense: Bill.FetchItems.DisplayedExpense? = nil
     @State private var isShowingCheckoutView = false
+
+    private var expenses: [Bill.FetchItems.DisplayedExpense] {
+        store.displayedExpenses
+    }
 
     var body: some View {
         ScrollView {
@@ -63,12 +67,12 @@ private struct ExpenseList: View {
 
                 Spacer(minLength: 16)
                 if !expenses.isEmpty {
-                    NavigationLink(
-                        destination: CheckoutView(closedBill: Bill(expenses: expenses)),
-                        isActive: $isShowingCheckoutView,
-                        label: { EmptyView() }
-                    )
-                    LastRowButton(title: "Fechar conta", action: {
+//                    NavigationLink(
+//                        destination: CheckoutView(expenses: expenses),
+//                        isActive: $isShowingCheckoutView,
+//                        label: { EmptyView() }
+//                    )
+                    LastCellButton(title: "Fechar conta", action: {
                         self.isShowingCheckoutView = true
                     })
                 }
@@ -76,7 +80,7 @@ private struct ExpenseList: View {
             }
             .padding()
             .sheet(item: $selectedExpense) { _ in
-                CreateItemView(expense: $selectedExpense)
+                //BillItemFormView(selectedItem: selectedExpense)
             }
         }
     }
@@ -84,24 +88,17 @@ private struct ExpenseList: View {
 
 // MARK: - Bill view
 
-class BillPresenter: ObservableObject {
-    @Published var expenses: [BillExpense] = [
-        BillExpense(name: "Café", price: 12.99, assignee: nil, quantity: 1),
-        BillExpense(name: "Banana", price: 0.50, assignee: "João", quantity: 3)
-    ]
-}
-
 struct BillView: View {
-    @State var addFormIsPresented = false
-    @ObservedObject var presenter = BillPresenter()
-
+    @State private var addFormIsPresented = false
     @State private var newExpense: BillExpense?
+
+    @EnvironmentObject var store: BillStore
 
     var body: some View {
         NavigationView {
             GeometryReader { (geometry) in
                 ZStack(alignment: .bottomTrailing) {
-                    ExpenseList(expenses: presenter.expenses)
+                    ExpenseList(store: store)
 
                     AddItemButton(action: { self.newExpense = BillExpense() })
                         .padding(.trailing)
@@ -109,7 +106,7 @@ struct BillView: View {
                         .sheet(item: $newExpense) {
                             print(newExpense.debugDescription)
                         } content: { _ in
-                            CreateItemView(expense: $newExpense)
+                            BillItemFormView()
                         }
                 }
                 .background(Color(.systemGray6).opacity(0.8))

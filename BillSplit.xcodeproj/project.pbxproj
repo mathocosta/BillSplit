@@ -9,9 +9,16 @@
 /* Begin PBXBuildFile section */
 		2709AC9D258D03CE00A4A548 /* BillExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2709AC9C258D03CE00A4A548 /* BillExpense.swift */; };
 		2709ACA8258D04EA00A4A548 /* CheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2709ACA7258D04EA00A4A548 /* CheckoutView.swift */; };
-		2709ACAD258D050B00A4A548 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2709ACAC258D050B00A4A548 /* Bill.swift */; };
+		2709ACAD258D050B00A4A548 /* ClosedBill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2709ACAC258D050B00A4A548 /* ClosedBill.swift */; };
 		2709ACB3258D11A400A4A548 /* PriceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2709ACB2258D11A400A4A548 /* PriceFormatter.swift */; };
 		2709ACC1258D1DDC00A4A548 /* BillTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2709ACC0258D1DDC00A4A548 /* BillTests.swift */; };
+		270FEEB12590E25C00957746 /* BillItemFormInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FEEB02590E25C00957746 /* BillItemFormInteractor.swift */; };
+		270FEEB62590E2B100957746 /* BillItemFormPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FEEB52590E2B100957746 /* BillItemFormPresenter.swift */; };
+		270FEEBC2590FD4600957746 /* BillSplit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 270FEEBA2590FD4600957746 /* BillSplit.xcdatamodeld */; };
+		270FEF012591087D00957746 /* BillInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FEF002591087D00957746 /* BillInteractor.swift */; };
+		270FEF062591088700957746 /* BillPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FEF052591088700957746 /* BillPresenter.swift */; };
+		270FEF0B259108CE00957746 /* BillModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FEF0A259108CE00957746 /* BillModels.swift */; };
+		270FEF1325910F2B00957746 /* PersistenceWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FEF1225910F2B00957746 /* PersistenceWorker.swift */; };
 		27135229258BBFE2003DF55F /* BillSplitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27135228258BBFE2003DF55F /* BillSplitApp.swift */; };
 		2713522B258BBFE2003DF55F /* BillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713522A258BBFE2003DF55F /* BillView.swift */; };
 		2713522D258BBFE4003DF55F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2713522C258BBFE4003DF55F /* Assets.xcassets */; };
@@ -20,7 +27,10 @@
 		27135246258BBFE5003DF55F /* BillSplitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27135245258BBFE5003DF55F /* BillSplitUITests.swift */; };
 		27135257258BCC50003DF55F /* ExpenseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27135256258BCC50003DF55F /* ExpenseListCell.swift */; };
 		2713525F258BD1DC003DF55F /* RoundedButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713525E258BD1DC003DF55F /* RoundedButtonStyle.swift */; };
-		27135267258BD880003DF55F /* CreateItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27135266258BD880003DF55F /* CreateItemView.swift */; };
+		279358C825B8B42A0022BEB5 /* ExpensesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279358C725B8B42A0022BEB5 /* ExpensesWorker.swift */; };
+		27FAEB5A2590C486003A20D2 /* BillStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FAEB592590C486003A20D2 /* BillStore.swift */; };
+		27FAEB5F2590DE80003A20D2 /* BillItemFormModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FAEB5E2590DE80003A20D2 /* BillItemFormModels.swift */; };
+		27FAEB742590E19E003A20D2 /* BillItemFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FAEB732590E19E003A20D2 /* BillItemFormView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,9 +53,16 @@
 /* Begin PBXFileReference section */
 		2709AC9C258D03CE00A4A548 /* BillExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillExpense.swift; sourceTree = "<group>"; };
 		2709ACA7258D04EA00A4A548 /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
-		2709ACAC258D050B00A4A548 /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
+		2709ACAC258D050B00A4A548 /* ClosedBill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosedBill.swift; sourceTree = "<group>"; };
 		2709ACB2258D11A400A4A548 /* PriceFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceFormatter.swift; sourceTree = "<group>"; };
 		2709ACC0258D1DDC00A4A548 /* BillTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillTests.swift; sourceTree = "<group>"; };
+		270FEEB02590E25C00957746 /* BillItemFormInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillItemFormInteractor.swift; sourceTree = "<group>"; };
+		270FEEB52590E2B100957746 /* BillItemFormPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillItemFormPresenter.swift; sourceTree = "<group>"; };
+		270FEEBB2590FD4600957746 /* BillSplit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BillSplit.xcdatamodel; sourceTree = "<group>"; };
+		270FEF002591087D00957746 /* BillInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillInteractor.swift; sourceTree = "<group>"; };
+		270FEF052591088700957746 /* BillPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillPresenter.swift; sourceTree = "<group>"; };
+		270FEF0A259108CE00957746 /* BillModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillModels.swift; sourceTree = "<group>"; };
+		270FEF1225910F2B00957746 /* PersistenceWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceWorker.swift; sourceTree = "<group>"; };
 		27135225258BBFE2003DF55F /* BillSplit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BillSplit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27135228258BBFE2003DF55F /* BillSplitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillSplitApp.swift; sourceTree = "<group>"; };
 		2713522A258BBFE2003DF55F /* BillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillView.swift; sourceTree = "<group>"; };
@@ -60,7 +77,10 @@
 		27135247258BBFE5003DF55F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27135256258BCC50003DF55F /* ExpenseListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseListCell.swift; sourceTree = "<group>"; };
 		2713525E258BD1DC003DF55F /* RoundedButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButtonStyle.swift; sourceTree = "<group>"; };
-		27135266258BD880003DF55F /* CreateItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemView.swift; sourceTree = "<group>"; };
+		279358C725B8B42A0022BEB5 /* ExpensesWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesWorker.swift; sourceTree = "<group>"; };
+		27FAEB592590C486003A20D2 /* BillStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillStore.swift; sourceTree = "<group>"; };
+		27FAEB5E2590DE80003A20D2 /* BillItemFormModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillItemFormModels.swift; sourceTree = "<group>"; };
+		27FAEB732590E19E003A20D2 /* BillItemFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillItemFormView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,8 +111,11 @@
 		2709AC7C258CC58200A4A548 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				279358C725B8B42A0022BEB5 /* ExpensesWorker.swift */,
+				270FEEBA2590FD4600957746 /* BillSplit.xcdatamodeld */,
 				2709AC9C258D03CE00A4A548 /* BillExpense.swift */,
-				2709ACAC258D050B00A4A548 /* Bill.swift */,
+				2709ACAC258D050B00A4A548 /* ClosedBill.swift */,
+				270FEF1225910F2B00957746 /* PersistenceWorker.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -103,6 +126,26 @@
 				2709ACB2258D11A400A4A548 /* PriceFormatter.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		270FEEE72591036800957746 /* Checkout */ = {
+			isa = PBXGroup;
+			children = (
+				2709ACA7258D04EA00A4A548 /* CheckoutView.swift */,
+			);
+			path = Checkout;
+			sourceTree = "<group>";
+		};
+		270FEEF6259106FC00957746 /* Bill */ = {
+			isa = PBXGroup;
+			children = (
+				2713522A258BBFE2003DF55F /* BillView.swift */,
+				27FAEB592590C486003A20D2 /* BillStore.swift */,
+				270FEF002591087D00957746 /* BillInteractor.swift */,
+				270FEF052591088700957746 /* BillPresenter.swift */,
+				270FEF0A259108CE00957746 /* BillModels.swift */,
+			);
+			path = Bill;
 			sourceTree = "<group>";
 		};
 		2713521C258BBFE2003DF55F = {
@@ -170,9 +213,9 @@
 			isa = PBXGroup;
 			children = (
 				27135272258BF451003DF55F /* Components */,
-				2713522A258BBFE2003DF55F /* BillView.swift */,
-				27135266258BD880003DF55F /* CreateItemView.swift */,
-				2709ACA7258D04EA00A4A548 /* CheckoutView.swift */,
+				270FEEE72591036800957746 /* Checkout */,
+				27FAEB662590E149003A20D2 /* BillItemForm */,
+				270FEEF6259106FC00957746 /* Bill */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -184,6 +227,17 @@
 				27135256258BCC50003DF55F /* ExpenseListCell.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		27FAEB662590E149003A20D2 /* BillItemForm */ = {
+			isa = PBXGroup;
+			children = (
+				27FAEB732590E19E003A20D2 /* BillItemFormView.swift */,
+				27FAEB5E2590DE80003A20D2 /* BillItemFormModels.swift */,
+				270FEEB02590E25C00957746 /* BillItemFormInteractor.swift */,
+				270FEEB52590E2B100957746 /* BillItemFormPresenter.swift */,
+			);
+			path = BillItemForm;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,15 +369,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2709ACAD258D050B00A4A548 /* Bill.swift in Sources */,
+				27FAEB5A2590C486003A20D2 /* BillStore.swift in Sources */,
+				270FEF012591087D00957746 /* BillInteractor.swift in Sources */,
+				2709ACAD258D050B00A4A548 /* ClosedBill.swift in Sources */,
 				2713522B258BBFE2003DF55F /* BillView.swift in Sources */,
-				27135267258BD880003DF55F /* CreateItemView.swift in Sources */,
+				270FEEBC2590FD4600957746 /* BillSplit.xcdatamodeld in Sources */,
 				2709AC9D258D03CE00A4A548 /* BillExpense.swift in Sources */,
 				2709ACA8258D04EA00A4A548 /* CheckoutView.swift in Sources */,
+				270FEEB62590E2B100957746 /* BillItemFormPresenter.swift in Sources */,
 				27135257258BCC50003DF55F /* ExpenseListCell.swift in Sources */,
+				270FEF062591088700957746 /* BillPresenter.swift in Sources */,
 				2713525F258BD1DC003DF55F /* RoundedButtonStyle.swift in Sources */,
+				270FEF0B259108CE00957746 /* BillModels.swift in Sources */,
 				27135229258BBFE2003DF55F /* BillSplitApp.swift in Sources */,
+				270FEF1325910F2B00957746 /* PersistenceWorker.swift in Sources */,
+				279358C825B8B42A0022BEB5 /* ExpensesWorker.swift in Sources */,
+				270FEEB12590E25C00957746 /* BillItemFormInteractor.swift in Sources */,
+				27FAEB742590E19E003A20D2 /* BillItemFormView.swift in Sources */,
 				2709ACB3258D11A400A4A548 /* PriceFormatter.swift in Sources */,
+				27FAEB5F2590DE80003A20D2 /* BillItemFormModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +708,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		270FEEBA2590FD4600957746 /* BillSplit.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				270FEEBB2590FD4600957746 /* BillSplit.xcdatamodel */,
+			);
+			currentVersion = 270FEEBB2590FD4600957746 /* BillSplit.xcdatamodel */;
+			name = BillSplit.xcdatamodeld;
+			path = BillSplit/Models/BillSplit.xcdatamodeld;
+			sourceTree = SOURCE_ROOT;
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2713521D258BBFE2003DF55F /* Project object */;
 }

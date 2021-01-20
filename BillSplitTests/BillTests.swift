@@ -10,7 +10,7 @@ import XCTest
 
 class BillTests: XCTestCase {
 
-    let sut = Bill(expenses: [
+    let sut = ClosedBill(expenses: [
         BillExpense(name: "Café", price: 12.99, assignee: "Pedro", quantity: 1),
         BillExpense(name: "Banana", price: 3.99, assignee: "Pedro", quantity: 4),
         BillExpense(name: "Bolo de laranja", price: 24.30, assignee: "João", quantity: 1)

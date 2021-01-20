@@ -10,13 +10,12 @@ import SwiftUI
 struct ExpenseListCell: View {
     @Environment(\.editMode) var editMode
 
-    let expense: BillExpense
+    let expense: Bill.FetchItems.DisplayedExpense
 
-    private func formatPrice(_ value: Double, quantity: Int) -> String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
+    private func formatPrice(_ value: Float, quantity: Int) -> String {
+        let formatter = PriceFormatter()
 
-        return formatter.string(from: NSNumber(value: value * Double(quantity))) ?? ""
+        return formatter.string(from: NSNumber(value: value * Float(quantity))) ?? ""
     }
 
     var body: some View {
@@ -57,7 +56,8 @@ struct ExpenseListCell: View {
 }
 
 struct RowView_Previews: PreviewProvider {
-    static let testExpense = BillExpense(name: "Café", price: 12.99, assignee: "Pedro", quantity: 1)
+    static let testExpense = Bill.FetchItems.DisplayedExpense(
+        id: UUID(), name: "Café", price: 12.99, assignee: "Pedro", quantity: 1)
 
     static var previews: some View {
         ExpenseListCell(expense: testExpense)
