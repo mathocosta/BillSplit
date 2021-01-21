@@ -17,9 +17,10 @@ class BillStore: ObservableObject, BillDisplayLogic {
 
     @Published var displayedExpenses: [Bill.FetchItems.DisplayedExpense] = []
 
-    init(managedObjectContext: NSManagedObjectContext) {
+    init(persistenceWorker: PersistenceWorker) {
         let presenter = BillPresenter()
-        let interactor = BillInteractor(managedObjectContext: managedObjectContext)
+        let interactor = BillInteractor()
+        interactor.worker = ExpensesWorker(persistenceWorker: persistenceWorker)
         interactor.presenter = presenter
         presenter.displayDelegate = self
         self.interactor = interactor

@@ -49,6 +49,8 @@ private struct ExpenseList: View {
     @State private var selectedExpense: Bill.FetchItems.DisplayedExpense? = nil
     @State private var isShowingCheckoutView = false
 
+    var onCellTapped: (Bill.FetchItems.DisplayedExpense) -> Void?
+
     private var expenses: [Bill.FetchItems.DisplayedExpense] {
         store.displayedExpenses
     }
@@ -59,9 +61,7 @@ private struct ExpenseList: View {
                 ForEach(expenses) { (expense) in
                     ExpenseListCell(expense: expense)
                         .onTapGesture {
-                            self.selectedExpense = expenses.first(where: {
-                                $0.id == expense.id
-                            })
+                            self.onCellTapped(expense)
                         }
                 }
 
@@ -80,7 +80,7 @@ private struct ExpenseList: View {
             }
             .padding()
             .sheet(item: $selectedExpense) { _ in
-                //BillItemFormView(selectedItem: selectedExpense)
+
             }
         }
     }
@@ -92,27 +92,45 @@ struct BillView: View {
     @State private var addFormIsPresented = false
     @State private var newExpense: BillExpense?
 
-    @EnvironmentObject var store: BillStore
+    private var persistenceWorker: PersistenceWorker
+
+    @ObservedObject var store: BillStore
+
+    init(persistenceWorker: PersistenceWorker) {
+        self.persistenceWorker = persistenceWorker
+        self.store = BillStore(persistenceWorker: persistenceWorker)
+    }
+
+    private func cellTappedAction(_ target: Bill.FetchItems.DisplayedExpense) {
+        newExpense = BillExpense(
+            id: target.id,
+            name: target.name,
+            price: target.price,
+            assignee: target.assignee,
+            quantity: target.quantity
+        )
+    }
 
     var body: some View {
         NavigationView {
             GeometryReader { (geometry) in
                 ZStack(alignment: .bottomTrailing) {
-                    ExpenseList(store: store)
+                    ExpenseList(store: store, onCellTapped: cellTappedAction(_:))
+                        .onAppear(perform: self.store.fetchExpenses)
 
                     AddItemButton(action: { self.newExpense = BillExpense() })
                         .padding(.trailing)
                         .padding(.bottom, geometry.safeAreaInsets.bottom + 16)
-                        .sheet(item: $newExpense) {
-                            print(newExpense.debugDescription)
-                        } content: { _ in
-                            BillItemFormView()
-                        }
                 }
                 .background(Color(.systemGray6).opacity(0.8))
                 .edgesIgnoringSafeArea(.bottom)
                 .navigationTitle("Conta aberta")
                 .navigationBarItems(trailing: EditButton())
+                .sheet(item: $newExpense) {
+                    print(newExpense.debugDescription)
+                } content: { _ in
+                    BillItemFormView(worker: persistenceWorker)
+                }
             }
         }
     }
@@ -120,6 +138,6 @@ struct BillView: View {
 
 struct BillView_Previews: PreviewProvider {
     static var previews: some View {
-        BillView()
+        BillView(persistenceWorker: .sharedInstance)
     }
 }

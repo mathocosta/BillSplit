@@ -16,28 +16,41 @@ class ExpensesWorker {
     }
 
     func createExpense(name: String, price: Float, assigne: String?, quantity: Int) {
-        let newExpense = Expense(context: persistenceWorker.managedObjectContext)
+        persistenceWorker.performBackgroundTask { (context) in
+            let newExpense = Expense(context: context)
 
-        newExpense.id = UUID()
-        newExpense.name = name
-        newExpense.price = price
-        newExpense.assignee = assigne
-        newExpense.quantity = Int32(quantity)
-
-        persistenceWorker.saveContext()
+            newExpense.id = UUID()
+            newExpense.name = name
+            newExpense.price = price
+            newExpense.assignee = assigne
+            newExpense.quantity = Int32(quantity)
+        }
     }
 
     func updateExpense(id: UUID, name: String, price: Float, assigne: String?, quantity: Int) {
         let request: NSFetchRequest<Expense> = Expense.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        request.fetchLimit = 1
 
         guard let expenseToUpdate = persistenceWorker.fetch(request).first else { return }
 
-        expenseToUpdate.name = name
-        expenseToUpdate.price = price
-        expenseToUpdate.assignee = assigne
-        expenseToUpdate.quantity = Int32(quantity)
+        persistenceWorker.performBackgroundTask { (context) in
+            expenseToUpdate.name = name
+            expenseToUpdate.price = price
+            expenseToUpdate.assignee = assigne
+            expenseToUpdate.quantity = Int32(quantity)
+        }
+    }
 
-        persistenceWorker.saveContext()
+    func makeFetchResultsController() -> NSFetchedResultsController<Expense> {
+        let fetchRequest: NSFetchRequest<Expense> = Expense.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+
+        return NSFetchedResultsController<Expense>(
+            fetchRequest: fetchRequest,
+            managedObjectContext: persistenceWorker.managedObjectContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
     }
 }

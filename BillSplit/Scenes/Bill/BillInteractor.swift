@@ -12,25 +12,20 @@ protocol BillBusinessLogic {
     func fetchItems()
 }
 
-protocol BillDataStore {
-}
-
-class BillInteractor: BillBusinessLogic, BillDataStore {
+class BillInteractor: NSObject, BillBusinessLogic {
     var presenter: BillPresentationLogic?
 
-    private let fetchResultsController: NSFetchedResultsController<Expense>
+    private lazy var fetchResultsController: NSFetchedResultsController<Expense> = {
+        guard let controller = self.worker?.makeFetchResultsController() else {
+            fatalError("ExpensesWorker is nil")
+        }
 
-    init(managedObjectContext: NSManagedObjectContext) {
-        let fetchRequest: NSFetchRequest<Expense> = Expense.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+        controller.delegate = self
 
-        self.fetchResultsController = NSFetchedResultsController<Expense>(
-            fetchRequest: fetchRequest,
-            managedObjectContext: managedObjectContext,
-            sectionNameKeyPath: nil,
-            cacheName: nil
-        )
-    }
+        return controller
+    }()
+
+    var worker: ExpensesWorker?
 
     func fetchItems() {
         do {
@@ -43,6 +38,18 @@ class BillInteractor: BillBusinessLogic, BillDataStore {
             }
         } catch {
             print(error.localizedDescription)
+        }
+    }
+}
+
+extension BillInteractor: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>
+    ) {
+        if let fetchedExpenses = controller.fetchedObjects as? [Expense] {
+            presenter?.presentFetchedItems(
+                response: Bill.FetchItems.Response(expenses: fetchedExpenses)
+            )
         }
     }
 }

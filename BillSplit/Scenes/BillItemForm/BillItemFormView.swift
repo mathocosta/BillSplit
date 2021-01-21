@@ -19,13 +19,23 @@ class BillItemFormStore: ObservableObject, BillItemFormDisplayLogic {
     var itemAssignee = ""
     var itemQuantity = 1
 
-    init(selectedItem: BillExpense?) {
+    private var fieldValues: BillItemForm.FormFields {
+        BillItemForm.FormFields(
+            itemName: itemName,
+            itemPrice: itemPrice,
+            itemAssignee: itemAssignee,
+            itemQuantity: itemQuantity
+        )
+    }
+
+    init(persistenceWorker: PersistenceWorker, itemToEdit: BillExpense?) {
         let presenter = BillItemFormPresenter()
         let interactor = BillItemFormInteractor()
-        interactor.itemToEdit = selectedItem
+        interactor.worker = ExpensesWorker(persistenceWorker: persistenceWorker)
+        interactor.itemToEdit = itemToEdit
         interactor.presenter = presenter
         presenter.displayDelegate = self
-
+        
         self.interactor = interactor
     }
 
@@ -41,13 +51,6 @@ class BillItemFormStore: ObservableObject, BillItemFormDisplayLogic {
     }
 
     func onSavePressed() {
-        let fieldValues = BillItemForm.FormFields(
-            itemName: itemName,
-            itemPrice: itemPrice,
-            itemAssignee: itemAssignee,
-            itemQuantity: itemQuantity
-        )
-
         if interactor?.itemToEdit != nil {
             interactor?.updateItem(
                 request: BillItemForm.UpdateItem.Request(fieldValues: fieldValues)
@@ -68,8 +71,8 @@ struct BillItemFormView: View {
         store.itemName.isEmpty || store.itemPrice < 0
     }
 
-    init(selectedItem: BillExpense? = nil) {
-        self.store = BillItemFormStore(selectedItem: selectedItem)
+    init(worker: PersistenceWorker, itemToEdit: BillExpense? = nil) {
+        self.store = BillItemFormStore(persistenceWorker: worker, itemToEdit: itemToEdit)
     }
 
     var body: some View {
@@ -87,6 +90,7 @@ struct BillItemFormView: View {
             .navigationTitle("Adicionar Item")
             .navigationBarItems(
                 trailing: Button("Salvar", action: {
+                    self.store.onSavePressed()
                     self.presentationMode.wrappedValue.dismiss()
                 })
             )
@@ -97,10 +101,11 @@ struct BillItemFormView: View {
 
 struct BillItemFormView_Previews: PreviewProvider {
     static var previews: some View {
-        BillItemFormView()
+        BillItemFormView(worker: .sharedInstance)
 
         BillItemFormView(
-            selectedItem: BillExpense(name: "Café", price: 12.99, assignee: nil, quantity: 1)
+            worker: .sharedInstance,
+            itemToEdit: BillExpense(name: "Café", price: 12.99, assignee: nil, quantity: 1)
         )
     }
 }

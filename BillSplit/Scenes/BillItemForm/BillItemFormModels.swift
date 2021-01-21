@@ -9,10 +9,10 @@ import UIKit
 
 enum BillItemForm {
     struct FormFields {
-        let itemName: String
-        let itemPrice: Float
-        let itemAssignee: String?
-        let itemQuantity: Int
+        var itemName: String = ""
+        var itemPrice: Float = 0.0
+        var itemAssignee: String?
+        var itemQuantity: Int = 1
     }
 
     struct EditItem {
