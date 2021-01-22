@@ -49,7 +49,8 @@ private struct ExpenseList: View {
     @State private var selectedExpense: Bill.FetchItems.DisplayedExpense? = nil
     @State private var isShowingCheckoutView = false
 
-    var onCellTapped: (Bill.FetchItems.DisplayedExpense) -> Void?
+    var onCellTapped: (Bill.FetchItems.DisplayedExpense) -> Void
+    var onDeleteTapped: (Bill.FetchItems.DisplayedExpense) -> Void
 
     private var expenses: [Bill.FetchItems.DisplayedExpense] {
         store.displayedExpenses
@@ -59,10 +60,12 @@ private struct ExpenseList: View {
         ScrollView {
             LazyVStack {
                 ForEach(expenses) { (expense) in
-                    ExpenseListCell(expense: expense)
-                        .onTapGesture {
-                            self.onCellTapped(expense)
-                        }
+                    ExpenseListCell(
+                        expense: expense,
+                        deleteButtonAction: { self.onDeleteTapped(expense) }
+                    ).onTapGesture {
+                        self.onCellTapped(expense)
+                    }
                 }
 
                 Spacer(minLength: 16)
@@ -111,12 +114,19 @@ struct BillView: View {
         )
     }
 
+    private func deleteCellAction(_ target: Bill.FetchItems.DisplayedExpense) {
+        store.deleteDisplayedExpense(target)
+    }
+
     var body: some View {
         NavigationView {
             GeometryReader { (geometry) in
                 ZStack(alignment: .bottomTrailing) {
-                    ExpenseList(store: store, onCellTapped: cellTappedAction(_:))
-                        .onAppear(perform: self.store.fetchExpenses)
+                    ExpenseList(
+                        store: store,
+                        onCellTapped: cellTappedAction(_:),
+                        onDeleteTapped: deleteCellAction(_:)
+                    ).onAppear(perform: self.store.fetchExpenses)
 
                     AddItemButton(action: { self.newExpense = BillExpense() })
                         .padding(.trailing)

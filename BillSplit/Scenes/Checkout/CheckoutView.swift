@@ -9,9 +9,9 @@ import SwiftUI
 
 private struct CheckoutCell: View {
     let label: String
-    let value: Float
+    let value: Double
 
-    private func formatPrice(_ value: Float) -> String {
+    private func formatPrice(_ value: Double) -> String {
         PriceFormatter().string(from: NSNumber(value: value)) ?? ""
     }
 
@@ -27,17 +27,17 @@ private struct CheckoutCell: View {
 class CheckoutStore: ObservableObject {
     let expenses: [BillExpense]
 
-    var subtotalValue: Float {
-        expenses.map({ $0.price * Float($0.quantity) }).reduce(0.0, +)
+    var subtotalValue: Double {
+        expenses.map({ $0.price * Double($0.quantity) }).reduce(0.0, +)
     }
 
-    var serviceTaxValue: Float {
+    var serviceTaxValue: Double {
         subtotalValue * 0.1
     }
 
-    var totalValueByAssignee: [String: Float] {
+    var totalValueByAssignee: [String: Double] {
         Dictionary(grouping: expenses, by: { $0.assignee ?? "Not assigned" })
-            .mapValues({ $0.map({ $0.price * Float($0.quantity)  }).reduce(0.0, +) })
+            .mapValues({ $0.map({ $0.price * Double($0.quantity)  }).reduce(0.0, +) })
     }
 
     init(expenses: [BillExpense]) {

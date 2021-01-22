@@ -11,11 +11,12 @@ struct ExpenseListCell: View {
     @Environment(\.editMode) var editMode
 
     let expense: Bill.FetchItems.DisplayedExpense
+    let deleteButtonAction: () -> Void
 
-    private func formatPrice(_ value: Float, quantity: Int) -> String {
+    private func formatPrice(_ value: Double, quantity: Int) -> String {
         let formatter = PriceFormatter()
 
-        return formatter.string(from: NSNumber(value: value * Float(quantity))) ?? ""
+        return formatter.string(from: NSNumber(value: value * Double(quantity))) ?? ""
     }
 
     var body: some View {
@@ -40,8 +41,9 @@ struct ExpenseListCell: View {
             }
             Spacer()
             Text(formatPrice(expense.price, quantity: expense.quantity))
+                .font(.headline)
             if editMode?.wrappedValue == .active {
-                Button(action: {}, label: {
+                Button(action: deleteButtonAction, label: {
                     Image(systemName: "xmark.circle.fill")
                         .imageScale(.large)
                         .foregroundColor(Color(.systemRed))
@@ -52,6 +54,7 @@ struct ExpenseListCell: View {
         .padding()
         .background(Color(.systemBackground))
         .cornerRadius(15)
+        .shadow(color: Color(.systemGray2), radius: 1, x: 0.0, y: 0.0)
     }
 }
 
@@ -60,10 +63,10 @@ struct RowView_Previews: PreviewProvider {
         id: UUID(), name: "Café", price: 12.99, assignee: "Pedro", quantity: 1)
 
     static var previews: some View {
-        ExpenseListCell(expense: testExpense)
+        ExpenseListCell(expense: testExpense, deleteButtonAction: {})
             .previewLayout(.sizeThatFits)
 
-        ExpenseListCell(expense: testExpense)
+        ExpenseListCell(expense: testExpense, deleteButtonAction: {})
             .previewLayout(.sizeThatFits)
             .environment(\.editMode, .constant(.active))
     }

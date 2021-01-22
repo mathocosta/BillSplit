@@ -10,7 +10,7 @@ import UIKit
 enum BillItemForm {
     struct FormFields {
         var itemName: String = ""
-        var itemPrice: Float = 0.0
+        var itemPrice: Double = 0.0
         var itemAssignee: String?
         var itemQuantity: Int = 1
     }
@@ -25,7 +25,7 @@ enum BillItemForm {
 
         struct ViewModel {
             let name: String
-            let price: Float
+            let price: Double
             let assignee: String
             let quantity: Int
         }

@@ -19,13 +19,25 @@ enum Bill {
         struct DisplayedExpense: Identifiable {
             let id: UUID
             let name: String
-            let price: Float
+            let price: Double
             let assignee: String?
             let quantity: Int
         }
 
         struct ViewModel {
             var displayedExpenses: [DisplayedExpense]
+        }
+    }
+
+    struct DeleteItem {
+        struct Request {
+            let index: Int
+        }
+
+        struct Response {
+        }
+
+        struct ViewModel {
         }
     }
 }

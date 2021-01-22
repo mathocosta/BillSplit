@@ -10,7 +10,7 @@ import Foundation
 struct BillExpense: Identifiable {
     var id: UUID = UUID()
     var name: String = ""
-    var price: Float = 0.0
+    var price: Double = 0.0
     var assignee: String? = nil
     var quantity: Int = 1
 }

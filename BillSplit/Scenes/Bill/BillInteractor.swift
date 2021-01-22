@@ -10,6 +10,7 @@ import CoreData
 
 protocol BillBusinessLogic {
     func fetchItems()
+    func deleteItem(request: Bill.DeleteItem.Request)
 }
 
 class BillInteractor: NSObject, BillBusinessLogic {
@@ -38,6 +39,13 @@ class BillInteractor: NSObject, BillBusinessLogic {
             }
         } catch {
             print(error.localizedDescription)
+        }
+    }
+
+    func deleteItem(request: Bill.DeleteItem.Request) {
+        if let fetchedExpenses = fetchResultsController.fetchedObjects,
+           let expenseToDeleteId = fetchedExpenses[request.index].id {
+            worker?.deleteExpense(id: expenseToDeleteId)
         }
     }
 }

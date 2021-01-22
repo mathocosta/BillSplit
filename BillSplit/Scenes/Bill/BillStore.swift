@@ -30,6 +30,13 @@ class BillStore: ObservableObject, BillDisplayLogic {
         interactor?.fetchItems()
     }
 
+    func deleteDisplayedExpense(_ expense: Bill.FetchItems.DisplayedExpense) {
+        guard let index = displayedExpenses.firstIndex(where: { $0.id == expense.id })
+            else { return }
+
+        interactor?.deleteItem(request: Bill.DeleteItem.Request(index: index))
+    }
+
     func displayItems(viewModel: Bill.FetchItems.ViewModel) {
         self.displayedExpenses = viewModel.displayedExpenses
     }

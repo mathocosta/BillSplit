@@ -15,7 +15,7 @@ class BillItemFormStore: ObservableObject, BillItemFormDisplayLogic {
     private var interactor: BillItemFormBusinessLogic?
 
     var itemName = ""
-    var itemPrice: Float = 0
+    var itemPrice: Double = 0
     var itemAssignee = ""
     var itemQuantity = 1
 

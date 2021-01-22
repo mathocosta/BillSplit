@@ -10,17 +10,17 @@ import Foundation
 struct ClosedBill {
     var expenses: [BillExpense]
 
-    var totalValue: Float {
-        expenses.map({ $0.price * Float($0.quantity) }).reduce(0.0, +)
+    var totalValue: Double {
+        expenses.map({ $0.price * Double($0.quantity) }).reduce(0.0, +)
     }
 
-    var serviceTaxValue: Float {
+    var serviceTaxValue: Double {
         totalValue * 0.1
     }
 
-    var totalValueByAssignee: [String: Float] {
+    var totalValueByAssignee: [String: Double] {
         Dictionary(grouping: expenses, by: { $0.assignee ?? "Not assigned" })
-            .mapValues({ $0.map({ $0.price * Float($0.quantity)  }).reduce(0.0, +) })
+            .mapValues({ $0.map({ $0.price * Double($0.quantity)  }).reduce(0.0, +) })
     }
 
     func expensesAssigned(to assigneeName: String) -> [BillExpense] {

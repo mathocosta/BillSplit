@@ -21,7 +21,7 @@ class PersistenceWorker {
         return container
     }()
 
-    lazy var managedObjectContext: NSManagedObjectContext = {
+    lazy var mainContext: NSManagedObjectContext = {
         let context = persistentContainer.viewContext
         context.automaticallyMergesChangesFromParent = true
 
@@ -29,13 +29,17 @@ class PersistenceWorker {
     }()
 
     func saveContext() {
-        if managedObjectContext.hasChanges {
-            do {
-                try managedObjectContext.save()
+        saveContext(mainContext)
+    }
 
-            } catch {
-                let nserror = error as NSError
-                print("Unresolved error \(nserror), \(nserror.userInfo)")
+    func saveContext(_ context: NSManagedObjectContext) {
+        if context.hasChanges {
+            context.perform {
+                do {
+                    try context.save()
+                } catch let error as NSError {
+                    fatalError("Unresolved error \(error), \(error.userInfo)")
+                }
             }
         }
     }
@@ -52,12 +56,7 @@ class PersistenceWorker {
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
         persistentContainer.performBackgroundTask { (backgroundContext) in
             block(backgroundContext)
-
-            do {
-                try backgroundContext.save()
-            } catch {
-                fatalError("Failure to save context: \(error)")
-            }
+            self.saveContext(backgroundContext)
         }
     }
 }
