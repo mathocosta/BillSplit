@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2709AC9D258D03CE00A4A548 /* BillExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2709AC9C258D03CE00A4A548 /* BillExpense.swift */; };
 		2709ACA8258D04EA00A4A548 /* CheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2709ACA7258D04EA00A4A548 /* CheckoutView.swift */; };
-		2709ACAD258D050B00A4A548 /* ClosedBill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2709ACAC258D050B00A4A548 /* ClosedBill.swift */; };
 		2709ACB3258D11A400A4A548 /* PriceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2709ACB2258D11A400A4A548 /* PriceFormatter.swift */; };
 		2709ACC1258D1DDC00A4A548 /* BillTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2709ACC0258D1DDC00A4A548 /* BillTests.swift */; };
 		270FEEB12590E25C00957746 /* BillItemFormInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FEEB02590E25C00957746 /* BillItemFormInteractor.swift */; };
@@ -28,6 +27,10 @@
 		27135257258BCC50003DF55F /* ExpenseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27135256258BCC50003DF55F /* ExpenseListCell.swift */; };
 		2713525F258BD1DC003DF55F /* RoundedButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713525E258BD1DC003DF55F /* RoundedButtonStyle.swift */; };
 		279358C825B8B42A0022BEB5 /* ExpensesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279358C725B8B42A0022BEB5 /* ExpensesWorker.swift */; };
+		27BF72F825BB45170098C7AA /* CheckoutWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BF72F725BB45170098C7AA /* CheckoutWorker.swift */; };
+		27BF730325BB51F30098C7AA /* CheckoutInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BF730225BB51F30098C7AA /* CheckoutInteractor.swift */; };
+		27BF730825BB525E0098C7AA /* CheckoutPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BF730725BB525E0098C7AA /* CheckoutPresenter.swift */; };
+		27BF730D25BB52870098C7AA /* CheckoutModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BF730C25BB52870098C7AA /* CheckoutModels.swift */; };
 		27FAEB5A2590C486003A20D2 /* BillStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FAEB592590C486003A20D2 /* BillStore.swift */; };
 		27FAEB5F2590DE80003A20D2 /* BillItemFormModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FAEB5E2590DE80003A20D2 /* BillItemFormModels.swift */; };
 		27FAEB742590E19E003A20D2 /* BillItemFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FAEB732590E19E003A20D2 /* BillItemFormView.swift */; };
@@ -53,7 +56,6 @@
 /* Begin PBXFileReference section */
 		2709AC9C258D03CE00A4A548 /* BillExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillExpense.swift; sourceTree = "<group>"; };
 		2709ACA7258D04EA00A4A548 /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
-		2709ACAC258D050B00A4A548 /* ClosedBill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosedBill.swift; sourceTree = "<group>"; };
 		2709ACB2258D11A400A4A548 /* PriceFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceFormatter.swift; sourceTree = "<group>"; };
 		2709ACC0258D1DDC00A4A548 /* BillTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillTests.swift; sourceTree = "<group>"; };
 		270FEEB02590E25C00957746 /* BillItemFormInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillItemFormInteractor.swift; sourceTree = "<group>"; };
@@ -78,6 +80,10 @@
 		27135256258BCC50003DF55F /* ExpenseListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseListCell.swift; sourceTree = "<group>"; };
 		2713525E258BD1DC003DF55F /* RoundedButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButtonStyle.swift; sourceTree = "<group>"; };
 		279358C725B8B42A0022BEB5 /* ExpensesWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesWorker.swift; sourceTree = "<group>"; };
+		27BF72F725BB45170098C7AA /* CheckoutWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutWorker.swift; sourceTree = "<group>"; };
+		27BF730225BB51F30098C7AA /* CheckoutInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutInteractor.swift; sourceTree = "<group>"; };
+		27BF730725BB525E0098C7AA /* CheckoutPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutPresenter.swift; sourceTree = "<group>"; };
+		27BF730C25BB52870098C7AA /* CheckoutModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutModels.swift; sourceTree = "<group>"; };
 		27FAEB592590C486003A20D2 /* BillStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillStore.swift; sourceTree = "<group>"; };
 		27FAEB5E2590DE80003A20D2 /* BillItemFormModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillItemFormModels.swift; sourceTree = "<group>"; };
 		27FAEB732590E19E003A20D2 /* BillItemFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillItemFormView.swift; sourceTree = "<group>"; };
@@ -111,11 +117,11 @@
 		2709AC7C258CC58200A4A548 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				270FEF1225910F2B00957746 /* PersistenceWorker.swift */,
 				279358C725B8B42A0022BEB5 /* ExpensesWorker.swift */,
+				27BF72F725BB45170098C7AA /* CheckoutWorker.swift */,
 				270FEEBA2590FD4600957746 /* BillSplit.xcdatamodeld */,
 				2709AC9C258D03CE00A4A548 /* BillExpense.swift */,
-				2709ACAC258D050B00A4A548 /* ClosedBill.swift */,
-				270FEF1225910F2B00957746 /* PersistenceWorker.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -132,6 +138,9 @@
 			isa = PBXGroup;
 			children = (
 				2709ACA7258D04EA00A4A548 /* CheckoutView.swift */,
+				27BF730225BB51F30098C7AA /* CheckoutInteractor.swift */,
+				27BF730725BB525E0098C7AA /* CheckoutPresenter.swift */,
+				27BF730C25BB52870098C7AA /* CheckoutModels.swift */,
 			);
 			path = Checkout;
 			sourceTree = "<group>";
@@ -369,22 +378,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27BF730825BB525E0098C7AA /* CheckoutPresenter.swift in Sources */,
 				27FAEB5A2590C486003A20D2 /* BillStore.swift in Sources */,
 				270FEF012591087D00957746 /* BillInteractor.swift in Sources */,
-				2709ACAD258D050B00A4A548 /* ClosedBill.swift in Sources */,
 				2713522B258BBFE2003DF55F /* BillView.swift in Sources */,
 				270FEEBC2590FD4600957746 /* BillSplit.xcdatamodeld in Sources */,
 				2709AC9D258D03CE00A4A548 /* BillExpense.swift in Sources */,
 				2709ACA8258D04EA00A4A548 /* CheckoutView.swift in Sources */,
+				27BF730D25BB52870098C7AA /* CheckoutModels.swift in Sources */,
 				270FEEB62590E2B100957746 /* BillItemFormPresenter.swift in Sources */,
 				27135257258BCC50003DF55F /* ExpenseListCell.swift in Sources */,
 				270FEF062591088700957746 /* BillPresenter.swift in Sources */,
 				2713525F258BD1DC003DF55F /* RoundedButtonStyle.swift in Sources */,
+				27BF72F825BB45170098C7AA /* CheckoutWorker.swift in Sources */,
 				270FEF0B259108CE00957746 /* BillModels.swift in Sources */,
 				27135229258BBFE2003DF55F /* BillSplitApp.swift in Sources */,
 				270FEF1325910F2B00957746 /* PersistenceWorker.swift in Sources */,
 				279358C825B8B42A0022BEB5 /* ExpensesWorker.swift in Sources */,
 				270FEEB12590E25C00957746 /* BillItemFormInteractor.swift in Sources */,
+				27BF730325BB51F30098C7AA /* CheckoutInteractor.swift in Sources */,
 				27FAEB742590E19E003A20D2 /* BillItemFormView.swift in Sources */,
 				2709ACB3258D11A400A4A548 /* PriceFormatter.swift in Sources */,
 				27FAEB5F2590DE80003A20D2 /* BillItemFormModels.swift in Sources */,

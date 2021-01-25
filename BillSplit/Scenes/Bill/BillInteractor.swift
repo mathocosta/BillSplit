@@ -33,8 +33,10 @@ class BillInteractor: NSObject, BillBusinessLogic {
             try fetchResultsController.performFetch()
 
             if let fetchedExpenses = fetchResultsController.fetchedObjects {
+                let notPaidExpenses = fetchedExpenses.filter({ !$0.isPaid })
+
                 presenter?.presentFetchedItems(
-                    response: Bill.FetchItems.Response(expenses: fetchedExpenses)
+                    response: Bill.FetchItems.Response(expenses: notPaidExpenses)
                 )
             }
         } catch {
@@ -55,8 +57,10 @@ extension BillInteractor: NSFetchedResultsControllerDelegate {
         _ controller: NSFetchedResultsController<NSFetchRequestResult>
     ) {
         if let fetchedExpenses = controller.fetchedObjects as? [Expense] {
+            let notPaidExpenses = fetchedExpenses.filter({ !$0.isPaid })
+
             presenter?.presentFetchedItems(
-                response: Bill.FetchItems.Response(expenses: fetchedExpenses)
+                response: Bill.FetchItems.Response(expenses: notPaidExpenses)
             )
         }
     }

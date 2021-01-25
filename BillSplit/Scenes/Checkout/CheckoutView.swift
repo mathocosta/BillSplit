@@ -24,28 +24,66 @@ private struct CheckoutCell: View {
     }
 }
 
-class CheckoutStore: ObservableObject {
-    let expenses: [BillExpense]
+protocol CheckoutDisplayLogic: AnyObject {
+    func displayCheckout(viewModel: Checkout.Show.ViewModel)
+    func displayPaymentResult(viewModel: Checkout.Payment.ViewModel)
+}
+
+class CheckoutStore: ObservableObject, CheckoutDisplayLogic {
+    enum ActiveAlert: Int, Identifiable {
+        case confirmPayment, paymentResult
+
+        var id: Int {
+            return rawValue
+        }
+    }
+
+    @Published var viewModel: Checkout.Show.ViewModel?
+    @Published var activeAlert: ActiveAlert?
+
+    private var expenses: [BillExpense]
+    var alertViewModel: Checkout.Payment.ViewModel?
+    var interactor: CheckoutBusinessLogic?
 
     var subtotalValue: Double {
-        expenses.map({ $0.price * Double($0.quantity) }).reduce(0.0, +)
+        viewModel?.subtotalValue ?? 0
     }
 
     var serviceTaxValue: Double {
-        subtotalValue * 0.1
+        viewModel?.serviceTaxValue ?? 0
     }
 
     var totalValueByAssignee: [String: Double] {
-        Dictionary(grouping: expenses, by: { $0.assignee ?? "Not assigned" })
-            .mapValues({ $0.map({ $0.price * Double($0.quantity)  }).reduce(0.0, +) })
+        viewModel?.totalValueByAssignee ?? [:]
     }
 
-    init(expenses: [BillExpense]) {
+    init(expenses: [BillExpense], persistenceWorker: PersistenceWorker) {
         self.expenses = expenses
+
+        let presenter = CheckoutPresenter()
+        let interactor = CheckoutInteractor()
+        interactor.worker = CheckoutWorker(persistenceWorker: persistenceWorker)
+        interactor.presenter = presenter
+        presenter.displayDelegate = self
+
+        self.interactor = interactor
     }
 
-    func expensesAssigned(to assigneeName: String) -> [BillExpense] {
-        expenses.filter({ $0.assignee == assigneeName })
+    func showCheckout() {
+        interactor?.showCheckout(request: .init(expenses: self.expenses))
+    }
+
+    func makePayment() {
+        interactor?.makePayment(request: .init(expenses: self.expenses))
+    }
+
+    func displayCheckout(viewModel: Checkout.Show.ViewModel) {
+        self.viewModel = viewModel
+    }
+
+    func displayPaymentResult(viewModel: Checkout.Payment.ViewModel) {
+        self.alertViewModel = viewModel
+        self.activeAlert = .paymentResult
     }
 }
 
@@ -54,16 +92,26 @@ struct CheckoutView: View {
     @ObservedObject private var store: CheckoutStore
     @State private var isShowingConfirmationAlert = false
 
-    init(expenses: [BillExpense]) {
-        self.store = CheckoutStore(expenses: expenses)
+    init(expenses: [BillExpense], persistenceWorker: PersistenceWorker) {
+        self.store = CheckoutStore(expenses: expenses, persistenceWorker: persistenceWorker)
     }
 
-    private func confirmationAlert() -> Alert {
+    private var paymentResultAlert: Alert {
+        Alert(
+            title: Text(store.alertViewModel!.titleText),
+            message: Text(store.alertViewModel!.messageText),
+            dismissButton: .default(Text("Ok"), action: {
+                self.presentationMode.wrappedValue.dismiss()
+            })
+        )
+    }
+
+    private var confirmationAlert: Alert {
         Alert(
             title: Text("Atenção"),
             message: Text("Ao confirmar pagamento, os dados serão resetados e não poderá ser desfeito."),
             primaryButton: .destructive(Text("Confirmar"), action: {
-                self.presentationMode.wrappedValue.dismiss()
+                self.store.makePayment()
             }),
             secondaryButton: .cancel()
         )
@@ -90,9 +138,17 @@ struct CheckoutView: View {
             .listStyle(GroupedListStyle())
             .navigationTitle("Conta fechada")
             .navigationBarItems(trailing: Button("Pagar", action: {
-                self.isShowingConfirmationAlert = true
+                self.store.activeAlert = .confirmPayment
             }))
-            .alert(isPresented: $isShowingConfirmationAlert, content: confirmationAlert)
+            .alert(item: $store.activeAlert, content: { (alert) in
+                switch alert {
+                case .confirmPayment:
+                    return confirmationAlert
+                case .paymentResult:
+                    return paymentResultAlert
+                }
+            })
+            .onAppear(perform: store.showCheckout)
     }
 }
 
@@ -103,7 +159,7 @@ struct CheckoutView_Previews: PreviewProvider {
                 BillExpense(name: "Café", price: 12.99, assignee: "Pedro", quantity: 1),
                 BillExpense(name: "Banana", price: 3.99, assignee: "Pedro", quantity: 1),
                 BillExpense(name: "Café", price: 12.99, assignee: "João", quantity: 1)
-            ])
+            ], persistenceWorker: .sharedInstance)
         }
     }
 }

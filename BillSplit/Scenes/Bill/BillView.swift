@@ -43,10 +43,24 @@ private struct AddItemButton: View {
     }
 }
 
+// TODO: Move this function to a proper file
+private func makeBillExpenses(
+    from displayedExpenses: [Bill.FetchItems.DisplayedExpense]
+) -> [BillExpense] {
+    displayedExpenses.map({
+        BillExpense(
+            id: $0.id,
+            name: $0.name,
+            price: $0.price,
+            assignee: $0.assignee,
+            quantity: $0.quantity
+        )
+    })
+}
+
 private struct ExpenseList: View {
     @ObservedObject var store: BillStore
 
-    @State private var selectedExpense: Bill.FetchItems.DisplayedExpense? = nil
     @State private var isShowingCheckoutView = false
 
     var onCellTapped: (Bill.FetchItems.DisplayedExpense) -> Void
@@ -63,18 +77,19 @@ private struct ExpenseList: View {
                     ExpenseListCell(
                         expense: expense,
                         deleteButtonAction: { self.onDeleteTapped(expense) }
-                    ).onTapGesture {
-                        self.onCellTapped(expense)
-                    }
+                    ).onTapGesture { self.onCellTapped(expense) }
                 }
 
                 Spacer(minLength: 16)
                 if !expenses.isEmpty {
-//                    NavigationLink(
-//                        destination: CheckoutView(expenses: expenses),
-//                        isActive: $isShowingCheckoutView,
-//                        label: { EmptyView() }
-//                    )
+                    NavigationLink(
+                        destination: CheckoutView(
+                            expenses: makeBillExpenses(from: expenses),
+                            persistenceWorker: store.persistenceWorker
+                        ),
+                        isActive: $isShowingCheckoutView,
+                        label: { EmptyView() }
+                    )
                     LastCellButton(title: "Fechar conta", action: {
                         self.isShowingCheckoutView = true
                     })
@@ -82,9 +97,6 @@ private struct ExpenseList: View {
 
             }
             .padding()
-            .sheet(item: $selectedExpense) { _ in
-
-            }
         }
     }
 }
