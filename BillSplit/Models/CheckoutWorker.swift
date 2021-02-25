@@ -9,9 +9,9 @@ import Foundation
 import CoreData
 
 class CheckoutWorker {
-    let persistenceWorker: PersistenceWorker
+    let persistenceWorker: PersistenceGateway
 
-    init(persistenceWorker: PersistenceWorker) {
+    init(persistenceWorker: PersistenceGateway) {
         self.persistenceWorker = persistenceWorker
     }
 

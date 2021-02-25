@@ -57,7 +57,7 @@ class CheckoutStore: ObservableObject, CheckoutDisplayLogic {
         viewModel?.totalValueByAssignee ?? [:]
     }
 
-    init(expenses: [BillExpense], persistenceWorker: PersistenceWorker) {
+    init(expenses: [BillExpense], persistenceWorker: PersistenceGateway) {
         self.expenses = expenses
 
         let presenter = CheckoutPresenter()
@@ -92,7 +92,7 @@ struct CheckoutView: View {
     @ObservedObject private var store: CheckoutStore
     @State private var isShowingConfirmationAlert = false
 
-    init(expenses: [BillExpense], persistenceWorker: PersistenceWorker) {
+    init(expenses: [BillExpense], persistenceWorker: PersistenceGateway) {
         self.store = CheckoutStore(expenses: expenses, persistenceWorker: persistenceWorker)
     }
 

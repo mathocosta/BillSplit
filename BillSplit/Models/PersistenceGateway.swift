@@ -1,5 +1,5 @@
 //
-//  PersistenceWorker.swift
+//  PersistenceGateway.swift
 //  BillSplit
 //
 //  Created by Matheus Oliveira Costa on 21/12/20.
@@ -8,10 +8,10 @@
 import Foundation
 import CoreData
 
-class PersistenceWorker {
-    static let sharedInstance = PersistenceWorker()
+open class PersistenceGateway {
+    static let sharedInstance = PersistenceGateway()
 
-    let persistentContainer: NSPersistentContainer = {
+    lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "BillSplit")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -33,20 +33,22 @@ class PersistenceWorker {
     }
 
     func saveContext(_ context: NSManagedObjectContext) {
-        if context.hasChanges {
-            context.perform {
-                do {
-                    try context.save()
-                } catch let error as NSError {
-                    fatalError("Unresolved error \(error), \(error.userInfo)")
-                }
+        context.perform {
+            do {
+                try context.save()
+            } catch let error as NSError {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
             }
+        }
+
+        if context != mainContext {
+            saveContext(mainContext)
         }
     }
 
     func fetch<T>(_ request: NSFetchRequest<T>) -> [T] {
         do {
-            let list = try persistentContainer.viewContext.fetch(request)
+            let list = try mainContext.fetch(request)
             return list
         } catch {
             return []
@@ -54,9 +56,10 @@ class PersistenceWorker {
     }
 
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
-        persistentContainer.performBackgroundTask { (backgroundContext) in
-            block(backgroundContext)
-            self.saveContext(backgroundContext)
+        let derivedContext = persistentContainer.newBackgroundContext()
+        derivedContext.perform {
+            block(derivedContext)
+            self.saveContext(derivedContext)
         }
     }
 }

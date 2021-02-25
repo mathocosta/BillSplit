@@ -28,24 +28,53 @@ class BillItemFormInteractor: BillItemFormBusinessLogic, BillItemFormDataStore {
         presenter?.presentItemToEdit(response: .init(itemToEdit: itemToEdit))
     }
 
+    private func validate(formFields: BillItemForm.FormFields) throws {
+        guard !formFields.itemName.isEmpty else {
+            throw BillItemForm.SavingError.missingName
+        }
+
+        guard formFields.itemPrice > 0 else {
+            throw BillItemForm.SavingError.invalidPrice
+        }
+    }
+
     func createItem(request: BillItemForm.CreateItem.Request) {
-        worker?.createExpense(
-            name: request.fieldValues.itemName,
-            price: request.fieldValues.itemPrice,
-            assigne: request.fieldValues.itemAssignee,
-            quantity: request.fieldValues.itemQuantity
-        )
+        do {
+            try validate(formFields: request.fieldValues)
+
+            worker?.createExpense(
+                name: request.fieldValues.itemName,
+                price: request.fieldValues.itemPrice,
+                assigne: request.fieldValues.itemAssignee,
+                quantity: request.fieldValues.itemQuantity
+            )
+
+            presenter?.presentCreateItem(response: BillItemForm.CreateItem.Response(success: true))
+        } catch {
+            presenter?.presentCreateItem(
+                response: BillItemForm.CreateItem.Response(success: false, error: error)
+            )
+        }
     }
 
     func updateItem(request: BillItemForm.UpdateItem.Request) {
-        guard let itemToEdit = self.itemToEdit else { return }
+        do {
+            guard let itemToEdit = self.itemToEdit
+                else { throw BillItemForm.SavingError.undefined }
 
-        worker?.updateExpense(
-            id: itemToEdit.id,
-            name: request.fieldValues.itemName,
-            price: request.fieldValues.itemPrice,
-            assigne: request.fieldValues.itemAssignee,
-            quantity: request.fieldValues.itemQuantity
-        )
+            try validate(formFields: request.fieldValues)
+
+            worker?.updateExpense(
+                id: itemToEdit.id,
+                name: request.fieldValues.itemName,
+                price: request.fieldValues.itemPrice,
+                assigne: request.fieldValues.itemAssignee,
+                quantity: request.fieldValues.itemQuantity
+            )
+
+            presenter?.presentUpdateItem(response: BillItemForm.UpdateItem.Response(success: true))
+        } catch {
+            presenter?.presentCreateItem(response: BillItemForm.CreateItem.Response(success: false, error: error))
+        }
     }
 }

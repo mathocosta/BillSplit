@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct BillSplitApp: App {
-    let persistenceWorker: PersistenceWorker = .sharedInstance
+    let persistenceWorker: PersistenceGateway = .sharedInstance
 
     var body: some Scene {
         WindowGroup {

@@ -17,13 +17,13 @@ class BillStore: ObservableObject, BillDisplayLogic {
 
     @Published var displayedExpenses: [Bill.FetchItems.DisplayedExpense] = []
 
-    let persistenceWorker: PersistenceWorker
+    let persistenceWorker: PersistenceGateway
 
-    init(persistenceWorker: PersistenceWorker) {
+    init(persistenceWorker: PersistenceGateway) {
         self.persistenceWorker = persistenceWorker
         let presenter = BillPresenter()
         let interactor = BillInteractor()
-        interactor.worker = ExpensesWorker(persistenceWorker: persistenceWorker)
+        interactor.worker = ExpensesWorker(persistenceGateway: persistenceWorker)
         interactor.presenter = presenter
         presenter.displayDelegate = self
         self.interactor = interactor

@@ -107,11 +107,11 @@ struct BillView: View {
     @State private var addFormIsPresented = false
     @State private var newExpense: BillExpense?
 
-    private var persistenceWorker: PersistenceWorker
+    private var persistenceWorker: PersistenceGateway
 
     @ObservedObject var store: BillStore
 
-    init(persistenceWorker: PersistenceWorker) {
+    init(persistenceWorker: PersistenceGateway) {
         self.persistenceWorker = persistenceWorker
         self.store = BillStore(persistenceWorker: persistenceWorker)
     }
@@ -150,8 +150,8 @@ struct BillView: View {
                 .navigationBarItems(trailing: EditButton())
                 .sheet(item: $newExpense) {
                     print(newExpense.debugDescription)
-                } content: { _ in
-                    BillItemFormView(worker: persistenceWorker)
+                } content: { (item) in
+                    BillItemFormView(worker: persistenceWorker, itemToEdit: item)
                 }
             }
         }

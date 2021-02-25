@@ -9,15 +9,19 @@ import SwiftUI
 
 protocol BillItemFormDisplayLogic: AnyObject {
     func displayItemToEdit(viewModel: BillItemForm.EditItem.ViewModel)
+    func displayCreatedItem(viewModel: BillItemForm.CreateItem.ViewModel)
+    func displayUpdatedItem(viewModel: BillItemForm.UpdateItem.ViewModel)
 }
 
 class BillItemFormStore: ObservableObject, BillItemFormDisplayLogic {
     private var interactor: BillItemFormBusinessLogic?
 
-    var itemName = ""
-    var itemPrice: Double = 0
-    var itemAssignee = ""
-    var itemQuantity = 1
+    @Published var alertViewModel: BillItemForm.SaveItem.ViewModel?
+
+    @Published var itemName = ""
+    @Published var itemPrice: Double = 0
+    @Published var itemAssignee = ""
+    @Published var itemQuantity = 1
 
     private var fieldValues: BillItemForm.FormFields {
         BillItemForm.FormFields(
@@ -28,15 +32,17 @@ class BillItemFormStore: ObservableObject, BillItemFormDisplayLogic {
         )
     }
 
-    init(persistenceWorker: PersistenceWorker, itemToEdit: BillExpense?) {
+    init(persistenceWorker: PersistenceGateway, itemToEdit: BillExpense?) {
         let presenter = BillItemFormPresenter()
         let interactor = BillItemFormInteractor()
-        interactor.worker = ExpensesWorker(persistenceWorker: persistenceWorker)
+        interactor.worker = ExpensesWorker(persistenceGateway: persistenceWorker)
         interactor.itemToEdit = itemToEdit
         interactor.presenter = presenter
         presenter.displayDelegate = self
         
         self.interactor = interactor
+
+        showItemToEdit()
     }
 
     func showItemToEdit() {
@@ -48,6 +54,14 @@ class BillItemFormStore: ObservableObject, BillItemFormDisplayLogic {
         itemPrice = viewModel.price
         itemAssignee = viewModel.assignee
         itemQuantity = viewModel.quantity
+    }
+
+    func displayCreatedItem(viewModel: BillItemForm.CreateItem.ViewModel) {
+        
+    }
+
+    func displayUpdatedItem(viewModel: BillItemForm.UpdateItem.ViewModel) {
+
     }
 
     func onSavePressed() {
@@ -71,7 +85,7 @@ struct BillItemFormView: View {
         store.itemName.isEmpty || store.itemPrice < 0
     }
 
-    init(worker: PersistenceWorker, itemToEdit: BillExpense? = nil) {
+    init(worker: PersistenceGateway, itemToEdit: BillExpense) {
         self.store = BillItemFormStore(persistenceWorker: worker, itemToEdit: itemToEdit)
     }
 
@@ -79,7 +93,7 @@ struct BillItemFormView: View {
         NavigationView {
             Form {
                 TextField("Nome do item", text: $store.itemName)
-                TextField("Preço", value: $store.itemPrice, formatter: PriceFormatter())
+                TextField("Preço", text: makePriceBinding())
                     .keyboardType(.decimalPad)
                 TextField("Responsável", text: $store.itemAssignee)
                 Stepper(value: $store.itemQuantity, in: 1...100) {
@@ -94,14 +108,19 @@ struct BillItemFormView: View {
                     self.presentationMode.wrappedValue.dismiss()
                 })
             )
-            .onAppear(perform: store.showItemToEdit)
         }
+    }
+
+    private func makePriceBinding() -> Binding<String> {
+        let formatter = PriceFormatter()
+        return Binding(get: { formatter.string(from: NSNumber(value: store.itemPrice)) ?? "" },
+                       set: { store.itemPrice = formatter.number(from: $0)?.doubleValue ?? .zero })
     }
 }
 
 struct BillItemFormView_Previews: PreviewProvider {
     static var previews: some View {
-        BillItemFormView(worker: .sharedInstance)
+        BillItemFormView(worker: .sharedInstance, itemToEdit: BillExpense())
 
         BillItemFormView(
             worker: .sharedInstance,

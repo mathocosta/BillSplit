@@ -8,6 +8,21 @@
 import UIKit
 
 enum BillItemForm {
+    enum SavingError: LocalizedError {
+        case missingName, invalidPrice, undefined
+
+        var errorDescription: String? {
+            switch self {
+            case .missingName:
+                return "O nome não pode ser vazio"
+            case .invalidPrice:
+                return "Preço inválido"
+            default:
+                return nil
+            }
+        }
+    }
+
     struct FormFields {
         var itemName: String = ""
         var itemPrice: Double = 0.0
@@ -31,27 +46,23 @@ enum BillItemForm {
         }
     }
 
-    struct CreateItem {
+    struct SaveItem {
         struct Request {
             let fieldValues: FormFields
         }
 
         struct Response {
+            let success: Bool
+            var error: Error? = nil
         }
 
         struct ViewModel {
+            let success: Bool
+            var titleText: String? = nil
+            var messageText: String? = nil
         }
     }
 
-    struct UpdateItem {
-        struct Request {
-            let fieldValues: FormFields
-        }
-
-        struct Response {
-        }
-
-        struct ViewModel {
-        }
-    }
+    typealias CreateItem = SaveItem
+    typealias UpdateItem = SaveItem
 }

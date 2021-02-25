@@ -9,17 +9,23 @@ import Foundation
 import CoreData
 
 class ExpensesWorker {
-    let persistenceWorker: PersistenceWorker
+    let persistenceGateway: PersistenceGateway
 
-    init(persistenceWorker: PersistenceWorker) {
-        self.persistenceWorker = persistenceWorker
+    init(persistenceGateway: PersistenceGateway) {
+        self.persistenceGateway = persistenceGateway
     }
 
-    func createExpense(name: String, price: Double, assigne: String?, quantity: Int) {
-        persistenceWorker.performBackgroundTask { (context) in
+    func createExpense(
+        id: UUID = UUID(),
+        name: String,
+        price: Double,
+        assigne: String?,
+        quantity: Int
+    ) {
+        persistenceGateway.performBackgroundTask { (context) in
             let newExpense = Expense(context: context)
 
-            newExpense.id = UUID()
+            newExpense.id = id
             newExpense.name = name
             newExpense.price = price
             newExpense.assignee = assigne
@@ -32,13 +38,13 @@ class ExpensesWorker {
         request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
         request.fetchLimit = 1
 
-        return persistenceWorker.fetch(request).first
+        return persistenceGateway.fetch(request).first
     }
 
     func updateExpense(id: UUID, name: String, price: Double, assigne: String?, quantity: Int) {
         guard let expenseToUpdate = findFirst(id: id) else { return }
 
-        persistenceWorker.performBackgroundTask { (context) in
+        persistenceGateway.performBackgroundTask { (context) in
             expenseToUpdate.name = name
             expenseToUpdate.price = price
             expenseToUpdate.assignee = assigne
@@ -48,9 +54,9 @@ class ExpensesWorker {
 
     func deleteExpense(id: UUID) {
         if let expenseToDelete = findFirst(id: id) {
-            persistenceWorker.mainContext.perform { [self] in
-                persistenceWorker.mainContext.delete(expenseToDelete)
-                persistenceWorker.saveContext()
+            persistenceGateway.mainContext.perform { [self] in
+                persistenceGateway.mainContext.delete(expenseToDelete)
+                persistenceGateway.saveContext()
             }
         }
     }
@@ -61,7 +67,7 @@ class ExpensesWorker {
 
         return NSFetchedResultsController<Expense>(
             fetchRequest: fetchRequest,
-            managedObjectContext: persistenceWorker.mainContext,
+            managedObjectContext: persistenceGateway.mainContext,
             sectionNameKeyPath: nil,
             cacheName: nil
         )

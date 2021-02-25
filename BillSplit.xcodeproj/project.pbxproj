@@ -17,7 +17,7 @@
 		270FEF012591087D00957746 /* BillInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FEF002591087D00957746 /* BillInteractor.swift */; };
 		270FEF062591088700957746 /* BillPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FEF052591088700957746 /* BillPresenter.swift */; };
 		270FEF0B259108CE00957746 /* BillModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FEF0A259108CE00957746 /* BillModels.swift */; };
-		270FEF1325910F2B00957746 /* PersistenceWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FEF1225910F2B00957746 /* PersistenceWorker.swift */; };
+		270FEF1325910F2B00957746 /* PersistenceGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FEF1225910F2B00957746 /* PersistenceGateway.swift */; };
 		27135229258BBFE2003DF55F /* BillSplitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27135228258BBFE2003DF55F /* BillSplitApp.swift */; };
 		2713522B258BBFE2003DF55F /* BillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713522A258BBFE2003DF55F /* BillView.swift */; };
 		2713522D258BBFE4003DF55F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2713522C258BBFE4003DF55F /* Assets.xcassets */; };
@@ -26,6 +26,8 @@
 		27135246258BBFE5003DF55F /* BillSplitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27135245258BBFE5003DF55F /* BillSplitUITests.swift */; };
 		27135257258BCC50003DF55F /* ExpenseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27135256258BCC50003DF55F /* ExpenseListCell.swift */; };
 		2713525F258BD1DC003DF55F /* RoundedButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713525E258BD1DC003DF55F /* RoundedButtonStyle.swift */; };
+		276C802C25CEE0C60059BB04 /* MockPersistenceWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C802B25CEE0C60059BB04 /* MockPersistenceWorker.swift */; };
+		277160B225E7C42C00259F11 /* ExpensesWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277160B125E7C42C00259F11 /* ExpensesWorkerTests.swift */; };
 		279358C825B8B42A0022BEB5 /* ExpensesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279358C725B8B42A0022BEB5 /* ExpensesWorker.swift */; };
 		27BF72F825BB45170098C7AA /* CheckoutWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BF72F725BB45170098C7AA /* CheckoutWorker.swift */; };
 		27BF730325BB51F30098C7AA /* CheckoutInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BF730225BB51F30098C7AA /* CheckoutInteractor.swift */; };
@@ -64,7 +66,7 @@
 		270FEF002591087D00957746 /* BillInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillInteractor.swift; sourceTree = "<group>"; };
 		270FEF052591088700957746 /* BillPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillPresenter.swift; sourceTree = "<group>"; };
 		270FEF0A259108CE00957746 /* BillModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillModels.swift; sourceTree = "<group>"; };
-		270FEF1225910F2B00957746 /* PersistenceWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceWorker.swift; sourceTree = "<group>"; };
+		270FEF1225910F2B00957746 /* PersistenceGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceGateway.swift; sourceTree = "<group>"; };
 		27135225258BBFE2003DF55F /* BillSplit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BillSplit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27135228258BBFE2003DF55F /* BillSplitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillSplitApp.swift; sourceTree = "<group>"; };
 		2713522A258BBFE2003DF55F /* BillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillView.swift; sourceTree = "<group>"; };
@@ -79,6 +81,8 @@
 		27135247258BBFE5003DF55F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27135256258BCC50003DF55F /* ExpenseListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseListCell.swift; sourceTree = "<group>"; };
 		2713525E258BD1DC003DF55F /* RoundedButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButtonStyle.swift; sourceTree = "<group>"; };
+		276C802B25CEE0C60059BB04 /* MockPersistenceWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPersistenceWorker.swift; sourceTree = "<group>"; };
+		277160B125E7C42C00259F11 /* ExpensesWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesWorkerTests.swift; sourceTree = "<group>"; };
 		279358C725B8B42A0022BEB5 /* ExpensesWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesWorker.swift; sourceTree = "<group>"; };
 		27BF72F725BB45170098C7AA /* CheckoutWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutWorker.swift; sourceTree = "<group>"; };
 		27BF730225BB51F30098C7AA /* CheckoutInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutInteractor.swift; sourceTree = "<group>"; };
@@ -117,7 +121,7 @@
 		2709AC7C258CC58200A4A548 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				270FEF1225910F2B00957746 /* PersistenceWorker.swift */,
+				270FEF1225910F2B00957746 /* PersistenceGateway.swift */,
 				279358C725B8B42A0022BEB5 /* ExpensesWorker.swift */,
 				27BF72F725BB45170098C7AA /* CheckoutWorker.swift */,
 				270FEEBA2590FD4600957746 /* BillSplit.xcdatamodeld */,
@@ -205,6 +209,8 @@
 				2709ACC0258D1DDC00A4A548 /* BillTests.swift */,
 				2713523A258BBFE5003DF55F /* BillSplitTests.swift */,
 				2713523C258BBFE5003DF55F /* Info.plist */,
+				276C802B25CEE0C60059BB04 /* MockPersistenceWorker.swift */,
+				277160B125E7C42C00259F11 /* ExpensesWorkerTests.swift */,
 			);
 			path = BillSplitTests;
 			sourceTree = "<group>";
@@ -393,7 +399,7 @@
 				27BF72F825BB45170098C7AA /* CheckoutWorker.swift in Sources */,
 				270FEF0B259108CE00957746 /* BillModels.swift in Sources */,
 				27135229258BBFE2003DF55F /* BillSplitApp.swift in Sources */,
-				270FEF1325910F2B00957746 /* PersistenceWorker.swift in Sources */,
+				270FEF1325910F2B00957746 /* PersistenceGateway.swift in Sources */,
 				279358C825B8B42A0022BEB5 /* ExpensesWorker.swift in Sources */,
 				270FEEB12590E25C00957746 /* BillItemFormInteractor.swift in Sources */,
 				27BF730325BB51F30098C7AA /* CheckoutInteractor.swift in Sources */,
@@ -407,8 +413,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				277160B225E7C42C00259F11 /* ExpensesWorkerTests.swift in Sources */,
 				2709ACC1258D1DDC00A4A548 /* BillTests.swift in Sources */,
 				2713523B258BBFE5003DF55F /* BillSplitTests.swift in Sources */,
+				276C802C25CEE0C60059BB04 /* MockPersistenceWorker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
